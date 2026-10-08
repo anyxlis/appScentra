@@ -1,0 +1,141 @@
+// ---------- Marca SCENTRA ----------
+$crema: #fbf6ec;
+$crema-oscuro: #f1e7d4;
+$marron: #4a2c1a;
+$dorado: #b0894a;
+$dorado-claro: #d9bf8c;
+
+$primary: $marron;
+$secondary: $dorado;
+$body-bg: $crema;
+$body-color: #3b2a1e;
+$font-family-sans-serif: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$headings-font-family: 'Cormorant Garamond', Georgia, serif;
+$headings-font-weight: 600;
+$border-radius: 0.6rem;
+$link-color: $marron;
+$card-border-color: rgba($dorado, 0.25);
+$input-focus-border-color: $dorado;
+$input-btn-focus-color: rgba($dorado, 0.3);
+
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+  --sc-crema: #{$crema};
+  --sc-marron: #{$marron};
+  --sc-dorado: #{$dorado};
+}
+
+body {
+  min-height: 100vh;
+}
+
+.text-dorado { color: $dorado !important; }
+.bg-crema { background: $crema-oscuro; }
+.fuente-marca { font-family: $headings-font-family; letter-spacing: 0.04em; }
+
+.btn-dorado {
+  @include button-variant($dorado, $dorado, #fff, darken($dorado, 8%), darken($dorado, 8%), #fff);
+}
+
+// ---------- Tienda ----------
+.navbar-tienda {
+  background: rgba($crema, 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba($dorado, 0.25);
+  .navbar-brand img { height: 46px; width: 46px; border-radius: 50%; }
+}
+
+.hero {
+  background: radial-gradient(circle at 70% 30%, #fff 0%, $crema 45%, $crema-oscuro 100%);
+  border-bottom: 1px solid rgba($dorado, 0.2);
+  h1 { font-size: clamp(2.4rem, 6vw, 4rem); color: $marron; }
+  .logo-hero { width: min(320px, 70vw); border-radius: 50%; box-shadow: 0 20px 50px rgba($marron, 0.15); }
+}
+
+.producto-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  &:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba($marron, 0.12); }
+  .producto-img {
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: linear-gradient(135deg, #fff, $crema-oscuro);
+  }
+  .sin-imagen {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; color: $dorado-claro;
+    background: linear-gradient(135deg, #fff, $crema-oscuro);
+  }
+}
+
+.badge-tipo {
+  &.original { background: $marron; }
+  &.t11 { background: $dorado; }
+  &.imitacion { background: #7a6a58; }
+}
+
+.btn-ml.active { background: $marron; color: #fff; border-color: $marron; }
+
+.whatsapp-flotante {
+  position: fixed; right: 18px; bottom: 18px; z-index: 1030;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25d366; color: #fff; font-size: 1.8rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  &:hover { color: #fff; filter: brightness(1.05); }
+}
+
+footer.pie {
+  background: $marron;
+  color: $crema;
+  a { color: $dorado-claro; }
+}
+
+// ---------- Admin ----------
+.admin-wrap { display: flex; min-height: 100vh; background: #f7f3ec; }
+
+.admin-sidebar {
+  width: 250px; flex-shrink: 0;
+  background: $marron; color: $crema;
+  .nav-link {
+    color: rgba($crema, 0.8); border-radius: 0.5rem; padding: 0.55rem 0.9rem;
+    i { width: 1.4rem; display: inline-block; }
+    &:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
+    &.active { color: $marron; background: $dorado-claro; font-weight: 500; }
+  }
+  .brand img { width: 44px; height: 44px; border-radius: 50%; }
+}
+
+@include media-breakpoint-down(lg) {
+  .admin-sidebar {
+    position: fixed; top: 0; bottom: 0; left: 0; z-index: 1045;
+    transform: translateX(-100%); transition: transform 0.25s;
+    &.abierto { transform: none; }
+  }
+}
+
+.admin-main { flex: 1; min-width: 0; }
+
+.kpi {
+  border: 0; border-left: 4px solid $dorado;
+  .kpi-valor { font-size: 1.45rem; font-weight: 600; color: $marron; }
+  .kpi-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #8a7a68; }
+  &.peligro { border-left-color: $danger; .kpi-valor { color: $danger; } }
+  &.exito { border-left-color: $success; .kpi-valor { color: $success; } }
+}
+
+.table > :not(caption) > * > * { vertical-align: middle; }
+.table thead th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: #7a6a58; white-space: nowrap; }
+
+.estado-pagada { @extend .badge; @extend .text-bg-success; }
+.estado-al_dia { @extend .badge; @extend .text-bg-info; }
+.estado-en_mora { @extend .badge; @extend .text-bg-danger; }
+.estado-anulada { @extend .badge; @extend .text-bg-secondary; }
+
+.barra-informe { height: 8px; border-radius: 4px; background: $dorado; }
+
+@media print {
+  .admin-sidebar, .no-print { display: none !important; }
+}
