@@ -76,10 +76,17 @@ $enable-shadows: false;
   --sc-serie-2: #2c6fb8; // gráficas: utilidad
   --sc-sombra: 0 1px 2px rgba(43, 26, 16, 0.04), 0 8px 24px rgba(43, 26, 16, 0.06);
   --sc-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --sc-safe-top: env(safe-area-inset-top, 0px);
 }
 
 html { -webkit-tap-highlight-color: transparent; }
-body { min-height: 100vh; font-feature-settings: 'tnum' 1; text-rendering: optimizeLegibility; }
+body { min-height: 100vh; font-feature-settings: 'tnum' 1; text-rendering: optimizeLegibility; padding-top: var(--sc-safe-top); }
+// App instalada: franja oscura detrás de la hora, el wifi y la batería; el contenido empieza debajo
+body::before {
+  content: ''; position: fixed; top: 0; left: 0; right: 0; height: var(--sc-safe-top);
+  background: $espresso; z-index: 2000; pointer-events: none;
+}
+.sticky-top { top: var(--sc-safe-top); }
 h1, h2, h3, .h1, .h2, .h3 { letter-spacing: -0.005em; line-height: 1.1; }
 :focus-visible { outline: 2px solid $champan; outline-offset: 2px; }
 
@@ -327,7 +334,7 @@ footer.pie {
   }
 }
 @include media-breakpoint-down(md) {
-  .con-barra-movil { padding-bottom: calc(70px + var(--sc-safe-bottom)); }
+  .con-barra-movil { padding-bottom: calc(96px + var(--sc-safe-bottom)) !important; }
   .whatsapp-flotante { display: none; }
 }
 
@@ -364,6 +371,7 @@ footer.pie {
   .admin-sidebar {
     position: fixed; top: 0; bottom: 0; left: 0; z-index: 1045; height: auto;
     transform: translateX(-100%); transition: transform 0.25s ease;
+    padding-top: calc(1rem + var(--sc-safe-top)) !important;
     padding-bottom: calc(1rem + var(--sc-safe-bottom)) !important;
     &.abierto { transform: none; box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3); }
   }
@@ -371,7 +379,7 @@ footer.pie {
 
 .admin-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .admin-top {
-  position: sticky; top: 0; z-index: 1020;
+  position: sticky; top: var(--sc-safe-top); z-index: 1020;
   background: rgba($lino, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid $linea;
   padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.6rem; min-height: 60px;
   .titulo-ruta { font-size: 0.98rem; font-weight: 500; color: $espresso; }

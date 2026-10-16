@@ -28,6 +28,7 @@ import { telefonoWa } from '../core/utils';
           @if (pwa.mostrarBoton()) {
             <button class="btn btn-suave btn-sm d-md-none" (click)="pwa.instalar()" aria-label="Instalar la app"><i class="bi bi-download"></i> App</button>
           }
+          <a routerLink="/admin" class="btn btn-suave btn-icono d-md-none" aria-label="Ingresar a administración" title="Administración"><i class="bi bi-person-lock"></i></a>
         </div>
         <div class="collapse navbar-collapse d-none d-md-flex">
           <ul class="navbar-nav ms-auto me-3">
@@ -43,7 +44,7 @@ import { telefonoWa } from '../core/utils';
 
     <main><router-outlet /></main>
 
-    <footer class="pie py-5 mt-5 con-barra-movil">
+    <footer class="pie pt-5 pb-4 mt-5 con-barra-movil">
       <div class="container">
         <div class="row g-4 align-items-start">
           <div class="col-md-5">
