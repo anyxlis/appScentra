@@ -1,9 +1,11 @@
 /* SCENTRA · Service worker (app instalable + uso sin conexión de la interfaz).
    Nunca guarda en caché las llamadas a Supabase: los datos siempre son en vivo. */
-const VERSION = 'scentra-v3';
+const VERSION = 'scentra-v4';
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/manifest-admin.webmanifest', '/img/logo.png', '/favicon.png', '/icons/icon-192.png'];
 
+// La versión nueva se activa sola apenas se descarga (la app se recarga una vez con el diseño nuevo)
 self.addEventListener('install', (e) => {
+  self.skipWaiting();
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(SHELL)).catch(() => undefined));
 });
 

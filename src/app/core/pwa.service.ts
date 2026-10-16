@@ -53,9 +53,11 @@ export class PwaService {
           });
         });
       });
+      // Solo recarga cuando reemplaza una versión anterior (no en la primera visita)
+      const habiaVersion = !!navigator.serviceWorker.controller;
       let recargado = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (recargado) return;
+        if (recargado || !habiaVersion) return;
         recargado = true;
         location.reload();
       });
