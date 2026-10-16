@@ -22,3 +22,12 @@ export class TipoPipe implements PipeTransform {
     return etiquetaTipo(v);
   }
 }
+
+const ESTADOS: Record<string, string> = { pagada: 'Pagada', al_dia: 'Al día', en_mora: 'En mora', anulada: 'Anulada', pendiente: 'Pendiente' };
+
+@Pipe({ name: 'estado' })
+export class EstadoPipe implements PipeTransform {
+  transform(v: string | null | undefined): string {
+    return ESTADOS[v ?? ''] ?? v ?? '';
+  }
+}

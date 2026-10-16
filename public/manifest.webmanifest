@@ -1,0 +1,24 @@
+{
+  "id": "/",
+  "name": "SCENTRA · Fragancias",
+  "short_name": "SCENTRA",
+  "description": "Catálogo de fragancias SCENTRA. Arma tu pedido y envíalo por WhatsApp.",
+  "lang": "es-CO",
+  "start_url": "/?origen=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF5EC",
+  "theme_color": "#2B1A10",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Catálogo", "url": "/catalogo", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Mi pedido", "url": "/carrito", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

@@ -5,11 +5,11 @@ import { SupabaseService } from '../core/supabase.service';
 import { ToastService } from '../core/toast.service';
 import { FacturaVenta } from '../core/models';
 import { hoyISO, primerDiaMes } from '../core/utils';
-import { CopPipe, FechaPipe } from '../shared/pipes';
+import { CopPipe, FechaPipe, EstadoPipe } from '../shared/pipes';
 
 @Component({
   selector: 'app-ventas',
-  imports: [FormsModule, RouterLink, CopPipe, FechaPipe],
+  imports: [FormsModule, RouterLink, CopPipe, FechaPipe, EstadoPipe],
   template: `
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
       <h2 class="mb-0">Facturas de venta</h2>
@@ -53,7 +53,7 @@ import { CopPipe, FechaPipe } from '../shared/pipes';
                 <td class="text-end">{{ f.total | cop }}</td>
                 <td class="text-end">{{ f.saldo | cop }}</td>
                 <td>
-                  <span [class]="'estado-' + f.estado_cobro">{{ f.estado_cobro.replace('_', ' ') }}</span>
+                  <span [class]="'estado-' + f.estado_cobro">{{ f.estado_cobro | estado }}</span>
                   @if (f.dias_mora > 0) { <div class="small text-danger">{{ f.dias_mora }} días</div> }
                 </td>
               </tr>

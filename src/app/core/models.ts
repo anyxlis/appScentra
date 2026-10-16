@@ -248,3 +248,41 @@ export const CATEGORIAS_GASTO = ['envíos', 'publicidad', 'empaques', 'transport
 export function etiquetaTipo(t: string): string {
   return TIPOS.find((x) => x.valor === t)?.etiqueta ?? t;
 }
+
+export interface ResultadosPeriodo {
+  ventas_brutas: number;
+  descuentos: number;
+  ventas_netas: number;
+  costo_ventas: number;
+  utilidad_bruta: number;
+  margen_bruto: number;
+  gastos: number;
+  utilidad_neta: number;
+  margen_neto: number;
+  facturas: number;
+  clientes: number;
+  unidades: number;
+  unidades_sin_costo: number;
+  ticket_promedio: number;
+  ventas_contado: number;
+  ventas_financiado: number;
+  anuladas: number;
+  valor_anuladas: number;
+}
+
+export interface InformePeriodo {
+  desde: string;
+  hasta: string;
+  resultados: ResultadosPeriodo;
+  anterior: ResultadosPeriodo & { desde: string; hasta: string };
+  flujo: { recaudo: number; compras_pagadas: number; gastos: number; flujo_neto: number; compras_credito: number };
+  gastos_categoria: { categoria: string; valor: number }[];
+  por_tipo: { tipo: TipoProducto; unidades: number; ventas: number; costo: number; utilidad: number }[];
+  productos: { producto: string; tipo: TipoProducto; mililitros: number; unidades: number; ventas: number; costo: number; utilidad: number; unidades_sin_costo: number | null }[];
+  metodos_pago: { metodo: string; valor: number; pagos: number }[];
+  top_clientes: { cliente_id: number; cliente: string; facturas: number; total: number; saldo: number; ultima_compra: string }[];
+  ventas_diarias: { fecha: string; ventas: number; recaudo: number }[];
+  cartera_edades: { por_vencer: number; d1_30: number; d31_60: number; d61_90: number; d90_mas: number; total: number; clientes: number };
+  inventario: { referencias: number; unidades: number; valor_costo: number; valor_venta: number; por_pedir: number; costo_por_pedir: number; sin_costo: number; agotadas: number };
+  cuentas_por_pagar: number;
+}

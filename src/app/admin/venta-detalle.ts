@@ -8,17 +8,17 @@ import { PdfService } from '../core/pdf.service';
 import { Configuracion, Cuota, FacturaVenta, METODOS_PAGO } from '../core/models';
 import { hoyISO, mensajeRecordatorio, urlWhatsapp } from '../core/utils';
 import { ModalComponent } from '../shared/modal.component';
-import { CopPipe, FechaPipe, TipoPipe } from '../shared/pipes';
+import { CopPipe, FechaPipe, TipoPipe, EstadoPipe } from '../shared/pipes';
 
 @Component({
   selector: 'app-venta-detalle',
-  imports: [FormsModule, RouterLink, DatePipe, ModalComponent, CopPipe, FechaPipe, TipoPipe],
+  imports: [FormsModule, RouterLink, DatePipe, ModalComponent, CopPipe, FechaPipe, TipoPipe, EstadoPipe],
   template: `
     @if (f(); as f) {
       <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
         <a routerLink="/admin/ventas" class="btn btn-sm btn-light"><i class="bi bi-arrow-left"></i></a>
         <h2 class="mb-0 me-2">Factura {{ f.numero }}</h2>
-        <span [class]="'estado-' + f.estado_cobro">{{ f.estado_cobro.replace('_', ' ') }}</span>
+        <span [class]="'estado-' + f.estado_cobro">{{ f.estado_cobro | estado }}</span>
         <div class="ms-auto d-flex flex-wrap gap-2">
           <button class="btn btn-outline-primary" (click)="pdf()"><i class="bi bi-filetype-pdf"></i> PDF</button>
           @if (f.estado === 'pendiente') {

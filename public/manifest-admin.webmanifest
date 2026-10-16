@@ -1,0 +1,25 @@
+{
+  "id": "/admin",
+  "name": "SCENTRA Admin · Ventas e inventario",
+  "short_name": "SCENTRA Admin",
+  "description": "Panel de ventas, cartera, compras, inventario e informes de SCENTRA.",
+  "lang": "es-CO",
+  "start_url": "/admin",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F6F2EC",
+  "theme_color": "#2B1A10",
+  "categories": ["business", "finance", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Nueva venta", "url": "/admin/ventas/nueva", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Cartera", "url": "/admin/cartera", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Informes", "url": "/admin/informes", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

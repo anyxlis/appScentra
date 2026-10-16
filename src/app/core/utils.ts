@@ -52,3 +52,32 @@ export function mensajeRecordatorio(
     .replaceAll('{fecha}', fecha(datos.fecha))
     .replaceAll('{saldo}', cop(datos.saldo));
 }
+
+/** Variación porcentual entre dos valores (null si no hay base para comparar). */
+export function variacion(actual: number, anterior: number): number | null {
+  const a = Number(actual), b = Number(anterior);
+  if (!b) return null;
+  return Math.round(((a - b) / Math.abs(b)) * 1000) / 10;
+}
+
+/** Descarga una tabla como CSV (se abre en Excel con tildes correctas). */
+export function descargarCsv(nombre: string, encabezados: string[], filas: (string | number | null | undefined)[][]): void {
+  const esc = (v: string | number | null | undefined) => {
+    const s = v === null || v === undefined ? '' : String(v);
+    return /[";\n]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s;
+  };
+  const contenido = [encabezados, ...filas].map((f) => f.map(esc).join(';')).join('\r\n');
+  const blob = new Blob(['﻿' + contenido], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nombre.endsWith('.csv') ? nombre : nombre + '.csv';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+export function ultimoDiaMes(iso: string): string {
+  const [y, m] = iso.split('-').map(Number);
+  const f = new Date(y, m, 0);
+  return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, '0')}-${String(f.getDate()).padStart(2, '0')}`;
+}

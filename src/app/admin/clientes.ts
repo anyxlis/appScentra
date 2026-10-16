@@ -5,7 +5,7 @@ import { SupabaseService } from '../core/supabase.service';
 import { ToastService } from '../core/toast.service';
 import { Cliente } from '../core/models';
 import { ModalComponent } from '../shared/modal.component';
-import { CopPipe, FechaPipe } from '../shared/pipes';
+import { CopPipe, FechaPipe, EstadoPipe } from '../shared/pipes';
 
 interface ClienteDetalle extends Cliente {
   facturas_lista?: { id: number; numero: string; fecha_emision: string; total: number; saldo: number; estado_cobro: string; proxima_fecha: string }[];
@@ -13,7 +13,7 @@ interface ClienteDetalle extends Cliente {
 
 @Component({
   selector: 'app-clientes',
-  imports: [FormsModule, RouterLink, ModalComponent, CopPipe, FechaPipe],
+  imports: [FormsModule, RouterLink, ModalComponent, CopPipe, FechaPipe, EstadoPipe],
   template: `
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
       <h2 class="mb-0">Clientes</h2>
@@ -82,7 +82,7 @@ interface ClienteDetalle extends Cliente {
               <tr role="button" [routerLink]="['/admin/ventas', v.id]">
                 <td>{{ v.numero }}</td><td>{{ v.fecha_emision | fecha }}</td>
                 <td class="text-end">{{ v.total | cop }}</td><td class="text-end">{{ v.saldo | cop }}</td>
-                <td><span [class]="'estado-' + v.estado_cobro">{{ v.estado_cobro.replace('_', ' ') }}</span></td>
+                <td><span [class]="'estado-' + v.estado_cobro">{{ v.estado_cobro | estado }}</span></td>
               </tr>
             } @empty { <tr><td colspan="5" class="text-muted text-center">Sin facturas</td></tr> }
           </tbody>
